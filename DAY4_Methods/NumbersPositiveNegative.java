@@ -1,4 +1,4 @@
-package Day_4_Methods;
+package DAY4_Methods;
 
 import java.util.Scanner;
 
@@ -37,10 +37,10 @@ public class NumbersPositiveNegative {
         }
 
         int res = compare(nums[0], nums[nums.length - 1]);
-        switch (res) {
-            case 1  -> System.out.println("First element is greater than the last element.");
-            case 0  -> System.out.println("First and last elements are equal.");
-            case -1 -> System.out.println("First element is less than the last element.");
-        }
+        // switch (res) {
+        //     case 1  -> System.out.println("First element is greater than the last element.");
+        //     case 0  -> System.out.println("First and last elements are equal.");
+        //     case -1 -> System.out.println("First element is less than the last element.");
+        // }
     }
 }

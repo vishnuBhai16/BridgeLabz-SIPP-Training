@@ -3,10 +3,8 @@ public class Vehicle {
     // Instance Variables
     private String ownerName;
     private String vehicleType;
-
     // Class Variable
     private static double registrationFee = 500.0; // Default fee for all vehicles
-
     // Constructor
     public Vehicle(String ownerName, String vehicleType) {
         this.ownerName = ownerName;

@@ -1,7 +1,5 @@
-package Day_4_Methods;
-
+package DAY4_Methods;
 import java.util.Scanner;
-
 public class SumOfNaturalNumber {
     public static long recursiveSum(long n) {
         if (n == 0)

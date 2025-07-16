@@ -14,8 +14,8 @@ public class Vote {
                 System.out.println("Student " + (i + 1) + " can vote.");
             } else {
                 System.out.println("Sorry! Student " + (i + 1) + " can't vote.");
-            }
-        }
+            } 
+        } 
         sc.close();
     }
 }

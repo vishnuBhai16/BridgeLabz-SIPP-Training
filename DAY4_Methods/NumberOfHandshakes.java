@@ -1,4 +1,4 @@
-package Day_4_Methods;
+package DAY4_Methods;
 import java.util.*;
 public class NumberOfHandshakes {
 

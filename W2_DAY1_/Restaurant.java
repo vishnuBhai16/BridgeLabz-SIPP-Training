@@ -1,6 +1,6 @@
 package W2_DAY1_;
 
-public class Restaurant { // ✅ Class name fixed
+public class Restaurant {
 
     // Fields (Attributes)
     private String name;
@@ -16,7 +16,7 @@ public class Restaurant { // ✅ Class name fixed
 
     // Method to display restaurant details
     public void displayDetails() {
-        System.out.println("Restaurant Name: " + name); // ✅ Quotes fixed
+        System.out.println("Restaurant Name: " + name);
         System.out.println("Location: " + location);
         System.out.println("Food Items: ");
         for (String item : foodItems) {

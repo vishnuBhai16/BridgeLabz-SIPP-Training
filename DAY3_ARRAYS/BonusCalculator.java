@@ -8,19 +8,16 @@ public class BonusCalculator {
         double[] bonus = new double[10];
         double[] newSalary = new double[10];
         double totalBonus = 0, totalOldSalary = 0, totalNewSalary = 0;
-
         for (int i = 0; i < 10; i++) {
             System.out.print("Enter salary of employee " + (i + 1) + ": ");
             salary[i] = sc.nextDouble();
             System.out.print("Enter years of service: ");
             serviceYears[i] = sc.nextInt();
-
             if (salary[i] < 0 || serviceYears[i] < 0) {
                 System.out.println("Invalid input, please re-enter.");
                 i--;
                 continue;
             }
-
             double rate = (serviceYears[i] > 5) ? 0.05 : 0.02;
             bonus[i] = salary[i] * rate;
             newSalary[i] = salary[i] + bonus[i];
