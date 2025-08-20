@@ -1,0 +1,214 @@
+Pseudo-code Problems – Day 3
+------------------------------------------------------------
+1. Java OOPs
+------------------------------------------------------------
+1.1 Food Delivery System (Moderate)
+class Customer {
+    String name;
+    String address;
+    constructor Customer(name, address) {
+        this.name = name;
+        this.address = address;
+    }
+}
+class Restaurant {
+    String name;
+    String location;
+    constructor Restaurant(name, location) {
+        this.name = name;
+        this.location = location;
+    }
+}
+
+class DeliveryBoy {
+    String name;
+    int id;
+    constructor DeliveryBoy(name, id) {
+        this.name = name;
+        this.id = id;
+    }
+}
+
+class Order {
+    Customer customer;
+    Restaurant restaurant;
+    DeliveryBoy deliveryBoy;
+
+    constructor Order(Customer c, Restaurant r, DeliveryBoy d) {
+        this.customer = c;
+        this.restaurant = r;
+        this.deliveryBoy = d;
+    }
+
+    method showOrder() {
+        print("Order for " + customer.name + 
+              " from " + restaurant.name + 
+              " delivered by " + deliveryBoy.name);
+    }
+}
+
+// Usage
+Customer c = new Customer("Alice", "Street 12");
+Restaurant r = new Restaurant("PizzaHut", "Downtown");
+DeliveryBoy d = new DeliveryBoy("Sam", 101);
+Order o = new Order(c, r, d);
+o.showOrder();
+
+
+1.2 Medical Record Manager (Moderate)
+
+interface Searchable {
+    method search(String query);
+}
+
+interface Printable {
+    method printReport();
+}
+
+class LabReport implements Searchable, Printable {
+    method search(String query) {
+        print("Searching in Lab Report for " + query);
+    }
+    method printReport() {
+        print("Printing Lab Report...");
+    }
+}
+
+class Prescription implements Searchable, Printable {
+    method search(String query) {
+        print("Searching in Prescription for " + query);
+    }
+    method printReport() {
+        print("Printing Prescription...");
+    }
+}
+
+// Usage
+Searchable s = new LabReport();
+s.search("Blood Test");
+
+Printable p = new Prescription();
+p.printReport();
+
+
+------------------------------------------------------------
+2. Data Structures & Algorithms
+------------------------------------------------------------
+
+2.1 Patient Record Hashing (Moderate)
+
+map<Integer, String> patientRecords;
+
+method addPatient(int id, String name) {
+    patientRecords.put(id, name);
+}
+
+method getPatient(int id) {
+    return patientRecords.get(id);
+}
+
+method updatePatient(int id, String newName) {
+    patientRecords.put(id, newName);
+}
+
+method deletePatient(int id) {
+    patientRecords.remove(id);
+}
+
+// Usage
+addPatient(101, "John");
+print(getPatient(101));
+updatePatient(101, "John Smith");
+deletePatient(101);
+
+
+2.2 Maze Solver Bot (Recursion with Backtracking)
+
+int maze[4][4] = {
+  {1, 0, 0, 0},
+  {1, 1, 0, 1},
+  {0, 1, 0, 0},
+  {1, 1, 1, 1}
+};
+
+int solution[4][4]; // to track path
+
+method solveMaze(x, y) {
+    if (x == N-1 && y == N-1 && maze[x][y] == 1) {
+        solution[x][y] = 1;
+        return true;
+    }
+
+    if (isSafe(x, y)) {
+        solution[x][y] = 1;
+
+        if (solveMaze(x+1, y)) return true;
+        if (solveMaze(x, y+1)) return true;
+
+        solution[x][y] = 0; // Backtrack
+        return false;
+    }
+    return false;
+}
+
+method isSafe(x, y) {
+    return (x >= 0 && y >= 0 && x < N && y < N && maze[x][y] == 1);
+}
+
+
+------------------------------------------------------------
+3. Collections, Generics, Streams
+------------------------------------------------------------
+
+3.1 Library Book Filter (Moderate)
+
+class Book {
+    String title;
+    int year;
+    double rating;
+
+    constructor Book(title, year, rating) {
+        this.title = title;
+        this.year = year;
+        this.rating = rating;
+    }
+}
+
+list<Book> books = new ArrayList<>();
+books.add(new Book("Book1", 2018, 4.7));
+books.add(new Book("Book2", 2010, 3.9));
+books.add(new Book("Book3", 2021, 4.8));
+
+list<Book> filtered = books.stream()
+                           .filter(b -> b.year > 2015 && b.rating > 4.5)
+                           .collect(toList());
+
+print(filtered);
+
+
+3.2 Payment Processor (Generic Transaction Class)
+
+class Transaction<T> {
+    T paymentMethod;
+    double amount;
+
+    constructor Transaction(T paymentMethod, double amount) {
+        this.paymentMethod = paymentMethod;
+        this.amount = amount;
+    }
+
+    method process() {
+        print("Processing " + paymentMethod + " for amount " + amount);
+    }
+}
+
+class UPI { String id; constructor UPI(id) { this.id = id; } }
+class Card { String number; constructor Card(number) { this.number = number; } }
+class NetBanking { String bank; constructor NetBanking(bank) { this.bank = bank; } }
+
+// Usage
+Transaction<UPI> t1 = new Transaction<>(new UPI("alice@upi"), 500);
+t1.process();
+
+Transaction<Card> t2 = new Transaction<>(new Card("1234-5678"), 1000);
+t2.process();

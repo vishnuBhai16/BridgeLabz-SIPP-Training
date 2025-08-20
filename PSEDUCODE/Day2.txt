@@ -1,0 +1,187 @@
+Pseudo-code Problems – Day 2
+------------------------------------------------------------
+1. Java OOPs
+------------------------------------------------------------
+1.1 Traffic Signal Simulation (Easy)
+
+enum TrafficLight { RED, YELLOW, GREEN }
+
+class SignalController {
+    TrafficLight current;
+
+    constructor SignalController() {
+        current = TrafficLight.RED;
+    }
+
+    method switchLight() {
+        if (current == RED) current = GREEN;
+        else if (current == GREEN) current = YELLOW;
+        else if (current == YELLOW) current = RED;
+    }
+
+    method showSignal() {
+        print("Current Signal: " + current);
+    }
+}
+
+// Usage
+SignalController sc = new SignalController();
+sc.showSignal();   // RED
+sc.switchLight();  // GREEN
+
+
+1.2 Smart Farming System (Moderate)
+
+abstract class Crop {
+    String name;
+
+    constructor Crop(String name) {
+        this.name = name;
+    }
+
+    abstract method waterRequirement();
+    abstract method harvest();
+}
+
+class Rice extends Crop {
+    constructor Rice() { super("Rice"); }
+    method waterRequirement() { print("Rice needs high water"); }
+    method harvest() { print("Harvest rice in 120 days"); }
+}
+
+class Wheat extends Crop {
+    constructor Wheat() { super("Wheat"); }
+    method waterRequirement() { print("Wheat needs moderate water"); }
+    method harvest() { print("Harvest wheat in 90 days"); }
+}
+
+// Usage
+Crop c1 = new Rice();
+c1.waterRequirement();
+c1.harvest();
+
+
+------------------------------------------------------------
+2. Data Structures & Algorithms
+------------------------------------------------------------
+
+2.1 Online Quiz Timer (Easy)
+
+array<int> timeSlots = new array[5]; // circular array
+int front = 0, rear = 0, size = 5;
+
+method addSlot(int seconds) {
+    timeSlots[rear] = seconds;
+    rear = (rear + 1) % size;
+}
+
+method checkTime(int index) {
+    if (timeSlots[index] <= 5)
+        print("Warning: Time running out!");
+}
+
+// Usage
+addSlot(30);
+addSlot(10);
+checkTime(1); // prints warning if <= 5
+
+
+2.2 Job Scheduler (Moderate)
+
+class Job {
+    String name;
+    int deadline;
+    int processingTime;
+
+    constructor Job(name, deadline, processingTime) {
+        this.name = name;
+        this.deadline = deadline;
+        this.processingTime = processingTime;
+    }
+}
+
+// Priority Queue: Sort jobs by earliest deadline
+priorityQueue<Job> jobQueue = new PriorityQueue<>(compare by deadline);
+
+method addJob(Job j) {
+    jobQueue.add(j);
+}
+
+method scheduleJobs() {
+    while (!jobQueue.isEmpty()) {
+        Job j = jobQueue.poll();
+        print("Processing: " + j.name);
+    }
+}
+
+// Usage
+addJob(new Job("Job1", 3, 5));
+addJob(new Job("Job2", 1, 2));
+scheduleJobs();
+
+
+------------------------------------------------------------
+3. Collections, Generics, Streams
+------------------------------------------------------------
+
+3.1 Online Store Cart System (Easy)
+
+class Item {
+    String name;
+    double price;
+    constructor Item(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+}
+
+list<Item> cart = new ArrayList<>();
+
+method addItem(Item i) {
+    cart.add(i);
+}
+
+generic method calculateTotal(List<T> items) {
+    double total = 0;
+    for each item in items:
+        total += item.price;
+    return total;
+}
+
+// Usage
+addItem(new Item("Book", 200));
+addItem(new Item("Pen", 20));
+print("Total = " + calculateTotal(cart));
+
+
+3.2 Hospital Department Mapper (Moderate)
+
+class Doctor {
+    String name;
+    String specialization;
+
+    constructor Doctor(name, specialization) {
+        this.name = name;
+        this.specialization = specialization;
+    }
+}
+
+map<String, list<Doctor>> departments = new HashMap<>();
+
+method addDoctor(String dept, Doctor d) {
+    if (!departments.containsKey(dept))
+        departments.put(dept, new ArrayList<>());
+    departments.get(dept).add(d);
+}
+
+method filterBySpecialization(String dept, String spec) {
+    return departments.get(dept).stream()
+                      .filter(d -> d.specialization.equals(spec))
+                      .collect(toList());
+}
+
+// Usage
+addDoctor("Cardiology", new Doctor("Dr. A", "Heart"));
+addDoctor("Cardiology", new Doctor("Dr. B", "Heart"));
+list<Doctor> result = filterBySpecialization("Cardiology", "Heart");
+print(result);

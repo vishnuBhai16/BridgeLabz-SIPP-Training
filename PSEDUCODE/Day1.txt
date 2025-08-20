@@ -1,0 +1,170 @@
+Pseudo-code Problems – Day 1
+------------------------------------------------------------
+1. Java OOPs
+------------------------------------------------------------
+1.1 Pet Adoption App
+
+class Pet {
+    String name;
+    int age;
+    constructor Pet(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    method showDetails() {
+        print("Name: " + name + ", Age: " + age);
+    }
+}
+class Dog extends Pet {
+    constructor Dog(String name, int age) {
+        super(name, age);
+    }
+    method sound() { print("Woof!"); }
+}
+
+class Cat extends Pet {
+    constructor Cat(String name, int age) {
+        super(name, age);
+    }
+    method sound() { print("Meow!"); }
+}
+
+class Bird extends Pet {
+    constructor Bird(String name, int age) {
+        super(name, age);
+    }
+    method sound() { print("Chirp!"); }
+}
+
+// Usage
+Dog d = new Dog("Tommy", 3);
+d.showDetails();
+d.sound();
+
+
+1.2 Library Membership Tracker
+
+class Member {
+    String name;
+    int id;
+    Date membershipDate;
+
+    constructor Member(String name, int id, Date membershipDate) {
+        this.name = name;
+        this.id = id;
+        this.membershipDate = membershipDate;
+    }
+
+    method isValidMembership() {
+        // Assume membership valid for 1 year
+        if (today - membershipDate < 365 days)
+            return true;
+        else
+            return false;
+    }
+}
+
+// Usage
+Member m1 = new Member("Alice", 101, "2024-10-01");
+print(m1.isValidMembership());
+
+
+------------------------------------------------------------
+2. Data Structures & Algorithms
+------------------------------------------------------------
+
+2.1 Undo Feature in Text Editor (Stack)
+
+stack<String> undoStack;
+
+method typeText(String text) {
+    undoStack.push(text);
+}
+
+method undo() {
+    if (!undoStack.isEmpty())
+        return undoStack.pop();
+    else
+        return "Nothing to undo";
+}
+
+// Usage
+typeText("Hello");
+typeText("World");
+print(undo()); // removes "World"
+
+
+2.2 Call Center Queue Management
+
+queue<Customer> normalQueue;
+queue<Customer> emergencyQueue;
+
+class Customer {
+    String name;
+    String type; // normal or emergency
+    constructor Customer(name, type) { ... }
+}
+
+method enqueue(Customer c) {
+    if (c.type == "emergency")
+        emergencyQueue.add(c);
+    else
+        normalQueue.add(c);
+}
+
+method dequeue() {
+    if (!emergencyQueue.isEmpty())
+        return emergencyQueue.poll();
+    else
+        return normalQueue.poll();
+}
+
+// Usage
+enqueue(new Customer("John", "normal"));
+enqueue(new Customer("Mary", "emergency"));
+print(dequeue()); // Mary served first
+
+
+------------------------------------------------------------
+3. Collections, Generics, Streams
+------------------------------------------------------------
+
+3.1 Student Score Storage
+
+map<String, Integer> scores;
+
+// Add students
+scores.put("Alice", 90);
+scores.put("Bob", 78);
+scores.put("Charlie", 95);
+
+// Find highest scorer using streams
+entry = scores.entrySet().stream()
+               .max(byValue)   // compare by score
+               .get();
+
+print("Topper: " + entry.key + " with score " + entry.value);
+
+
+3.2 Employee Record Keeper
+
+class Employee {
+    String name;
+    String dept;
+    constructor Employee(name, dept) {
+        this.name = name;
+        this.dept = dept;
+    }
+}
+
+list<Employee> employees = new ArrayList<>();
+employees.add(new Employee("Sam", "HR"));
+employees.add(new Employee("John", "IT"));
+employees.add(new Employee("Lisa", "HR"));
+
+// Filter employees by department using streams
+list<Employee> hrEmployees = employees.stream()
+                                       .filter(e -> e.dept.equals("HR"))
+                                       .collect(toList());
+
+print(hrEmployees);
